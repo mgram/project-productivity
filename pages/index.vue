@@ -1,24 +1,31 @@
 <template>
-  <div class='container'>
+  <div class="container">
     <div class="todos">
-      <h1>Todos will go here</h1>
+      <h1>Today's tasks</h1>
+      <Item text="Todo list item" />
+      <Item text="Item number 2" />
+      <Item text="Number 3" />
+      <Item text="This is an awesome number 4" />
     </div>
     <div class="pomodoro">
       <div class="timer">
-      <h1>Timer goes here</h1>
+        <h1>Timer goes here</h1>
+      </div>
+      <div class="completions">
+        <h1>Completions go here</h1>
+      </div>
     </div>
-    <div class="completions">
-      <h1>Completions go here</h1>
-    </div>
-    </div>
-    
   </div>
 </template>
 
 <script>
+import Item from "../components/Item.vue";
 export default {
-  name: 'IndexPage'
-}
+  name: "IndexPage",
+  components: {
+    Item,
+  },
+};
 </script>
 <style scoped>
 .container {
@@ -29,7 +36,6 @@ export default {
 .todos {
   width: 40%;
   margin: 20px;
-  background: grey;
   text-align: center;
   padding: 20px;
   font-size: 12px;
@@ -52,5 +58,9 @@ export default {
   text-align: center;
   margin: 20px;
   padding: 20px;
+}
+.todos h1 {
+  text-align: left;
+  margin-bottom: 20px;
 }
 </style>
