@@ -6,6 +6,7 @@
       type="text"
       class="text"
       :class="{ done: isDone() }"
+      @keyup.enter="handleEnter(index)"
     />
   </div>
 </template>
@@ -14,11 +15,11 @@
 export default {
   data() {
     return {
-      status: "active",
+      status: this.itemStatus,
       todo: this.text,
     };
   },
-  props: ["text"],
+  props: ["text", "itemStatus", "index", "id"],
   methods: {
     toggle() {
       if (this.status == "active") {
@@ -29,6 +30,9 @@ export default {
     },
     isDone() {
       return this.status == "done";
+    },
+    handleEnter(index) {
+      this.$emit("insertTodo", index);
     },
   },
 };

@@ -2,10 +2,7 @@
   <div class="container">
     <div class="todos">
       <h1>Today's tasks</h1>
-      <Item text="Todo list item" />
-      <Item text="Item number 2" />
-      <Item text="Number 3" />
-      <Item text="This is an awesome number 4" />
+      <List />
     </div>
     <div class="pomodoro">
       <div class="timer">
@@ -19,11 +16,11 @@
 </template>
 
 <script>
-import Item from "../components/Item.vue";
+import List from "../components/List.vue";
 export default {
   name: "IndexPage",
   components: {
-    Item,
+    List,
   },
 };
 </script>
