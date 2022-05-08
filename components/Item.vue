@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       status: "active",
-      todo: text,
+      todo: this.text,
     };
   },
   props: ["text"],
