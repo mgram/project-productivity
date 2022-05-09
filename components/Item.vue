@@ -8,8 +8,8 @@
       :class="{ done: isDone() }"
       @keyup.enter="handleEnter(index)"
       @keydown.delete="handleDelete(index)"
-      @keyup.up="handleUp(index)"
-      @keyup.down="handleDown(index)"
+      @keydown.up="handleUp(index)"
+      @keydown.down="handleDown(index)"
     />
   </div>
 </template>
