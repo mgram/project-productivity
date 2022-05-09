@@ -49,7 +49,8 @@ export default {
     removeItem(index) {
       if (this.items.length == 1) return;
       this.items.splice(index, 1);
-      this.moveFocus(index - 1);
+      if (index == 0) this.moveFocus(index);
+      else this.moveFocus(index - 1);
       this.save();
     },
     handleKey(index, keyType) {
