@@ -8,6 +8,8 @@
       :class="{ done: isDone() }"
       @keyup.enter="handleEnter(index)"
       @keydown.delete="handleDelete(index)"
+      @keyup.up="handleUp(index)"
+      @keyup.down="handleDown(index)"
     />
   </div>
 </template>
@@ -37,6 +39,12 @@ export default {
     },
     handleDelete(index) {
       if (this.todo == "") this.$emit("removeTodo", index);
+    },
+    handleUp(index) {
+      this.$emit("handleKey", index, "up");
+    },
+    handleDown(index) {
+      this.$emit("handleKey", index, "down");
     },
   },
 };

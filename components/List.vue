@@ -7,6 +7,7 @@
         :index="index"
         @insertTodo="(index) => insertItem(index)"
         @removeTodo="(index) => removeItem(index)"
+        @handleKey="(index, keyType) => handleKey(index, keyType)"
         :id="item.id"
       />
     </div>
@@ -43,6 +44,14 @@ export default {
       if (this.items.length == 1) return;
       this.items.splice(index, 1);
       this.moveFocus(index - 1);
+    },
+    handleKey(index, keyType) {
+      if (keyType == "up") {
+        if (index != 0) this.moveFocus(index - 1);
+      }
+      if (keyType == "down") {
+        if (index != this.items.length - 1) this.moveFocus(index + 1);
+      }
     },
     moveFocus(index) {
       this.$nextTick(() => {
