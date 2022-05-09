@@ -22,6 +22,14 @@ export default {
       todo: this.text,
     };
   },
+  watch: {
+    status: function () {
+      this.$emit("statusChanged", this.index, this.status);
+    },
+    todo: function () {
+      this.$emit("textChanged", this.index, this.todo);
+    },
+  },
   props: ["text", "itemStatus", "index", "id"],
   methods: {
     toggle() {
