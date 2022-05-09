@@ -6,6 +6,7 @@
         :itemStatus="item.status"
         :index="index"
         @insertTodo="(index) => insertItem(index)"
+        @removeTodo="(index) => removeItem(index)"
         :id="item.id"
       />
     </div>
@@ -22,13 +23,8 @@ export default {
       items: [
         {
           id: uuidv4(),
-          todo: "Sample todo 1",
+          todo: "Type a todo & press Enter",
           status: "active",
-        },
-        {
-          id: uuidv4(),
-          todo: "Sample todo 2",
-          status: "done",
         },
       ],
     };
@@ -42,6 +38,11 @@ export default {
       };
       this.items.splice(index + 1, 0, itemToInsert);
       this.moveFocus(index + 1);
+    },
+    removeItem(index) {
+      if (this.items.length == 1) return;
+      this.items.splice(index, 1);
+      this.moveFocus(index - 1);
     },
     moveFocus(index) {
       this.$nextTick(() => {

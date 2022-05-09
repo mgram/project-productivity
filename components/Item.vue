@@ -7,6 +7,7 @@
       class="text"
       :class="{ done: isDone() }"
       @keyup.enter="handleEnter(index)"
+      @keydown.delete="handleDelete(index)"
     />
   </div>
 </template>
@@ -33,6 +34,9 @@ export default {
     },
     handleEnter(index) {
       this.$emit("insertTodo", index);
+    },
+    handleDelete(index) {
+      if (this.todo == "") this.$emit("removeTodo", index);
     },
   },
 };
