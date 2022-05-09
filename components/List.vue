@@ -79,6 +79,16 @@ export default {
         localStorage.todos = JSON.stringify(this.items);
       }
     },
+    clearTodos() {
+      let itemToInsert = {
+        id: uuidv4(),
+        todo: "",
+        status: "active",
+      };
+      this.items = [];
+      this.items.push(itemToInsert);
+      this.moveFocus(0);
+    },
   },
 };
 </script>
