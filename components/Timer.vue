@@ -6,7 +6,7 @@
     <div v-if="timerState == 'abort'" class="abort" @click="toggle">
       <h2>ABORT</h2>
     </div>
-    <h1>{{ timer }}</h1>
+    <h1>{{ getMinutes }} : {{ getSeconds }}</h1>
   </div>
 </template>
 
@@ -19,6 +19,20 @@ export default {
       shouldContinue: true,
       timeOutID: "",
     };
+  },
+  computed: {
+    getSeconds() {
+      return (this.timer % 60).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    },
+    getMinutes() {
+      return Math.floor(this.timer / 60).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    },
   },
   props: ["count"],
   watch: {

@@ -9,7 +9,7 @@
     </div>
     <div class="pomodoro">
       <div class="timer">
-        <Timer count="6" />
+        <Timer count="1200" />
       </div>
       <div class="completions">
         <h1>Completions go here</h1>
