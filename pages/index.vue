@@ -9,7 +9,7 @@
     </div>
     <div class="pomodoro">
       <div class="timer">
-        <h1>Timer goes here</h1>
+        <Timer count="6" />
       </div>
       <div class="completions">
         <h1>Completions go here</h1>
@@ -20,6 +20,7 @@
 
 <script>
 import List from "../components/List.vue";
+import Timer from "../components/Timer.vue";
 export default {
   name: "IndexPage",
   components: {
@@ -51,12 +52,10 @@ export default {
 .pomodoro {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 60%;
 }
 .timer {
-  background: grey;
   font-size: 12px;
-  text-align: center;
   margin: 20px;
   padding: 20px;
 }
