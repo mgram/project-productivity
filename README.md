@@ -4,6 +4,8 @@
 
 This is a tool that helps manage everyday tasks with a simple todo and a Pomodoro timer. No server and all data stored in local storage. 
 
+[Deployed here](https://todo-and-timer.onrender.com/)
+
 ## Build Setup
 
 ```bash
