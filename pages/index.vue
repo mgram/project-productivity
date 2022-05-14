@@ -13,22 +13,44 @@
         <p :class="breakClass" @click="setBreak">Break</p>
       </div>
       <div class="timer">
-        <Timer :count="getCount" :key="getCount" />
+        <Timer
+          :count="getCount"
+          :key="getCount"
+          @onCompletion="(value) => addCompletion(value)"
+        />
       </div>
       <div class="completions">
-        <h1>Completions go here</h1>
+        <h1 class="totalTime">
+          <span>{{ getTotalTime }} </span>
+        </h1>
+        <ul>
+          <li
+            v-for="completion in completedItems"
+            :key="completion.id"
+            class="completionItem"
+          >
+            Completed a work session at {{ completion.endTime }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "IndexPage",
   data() {
     return {
       mode: "work",
+      completedItems: [],
     };
+  },
+  mounted() {
+    if (localStorage.completions) {
+      this.completedItems = JSON.parse(localStorage.completions);
+    }
   },
   computed: {
     workClass() {
@@ -43,11 +65,16 @@ export default {
       if (this.mode == "work") return 1200;
       if (this.mode == "break") return 600;
     },
+    getTotalTime() {
+      return this.completedItems.length * 20 + " mins";
+    },
   },
   methods: {
     resetTodos() {
       if (localStorage) {
         localStorage.removeItem("todos");
+        localStorage.removeItem("completions");
+        this.completedItems = [];
         this.$refs.list.clearTodos();
       }
     },
@@ -56,6 +83,16 @@ export default {
     },
     setBreak() {
       this.mode = "break";
+    },
+    addCompletion(value) {
+      if (this.mode == "work") {
+        value.id = uuidv4();
+        this.completedItems.push(value);
+        if (localStorage) {
+          localStorage.removeItem("completions");
+          localStorage.completions = JSON.stringify(this.completedItems);
+        }
+      }
     },
   },
 };
@@ -85,11 +122,17 @@ export default {
   margin-top: 0px;
 }
 .completions {
-  background: grey;
   font-size: 12px;
   text-align: center;
   margin: 20px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.completionItem {
+  text-align: left;
+  font-size: 20px;
+  line-height: 1.5;
 }
 .todos h1 {
   text-align: left;
@@ -108,7 +151,8 @@ export default {
   text-align: center;
   border-radius: 50%;
   align-self: center;
-  position: relative;
+  position: absolute;
+  right: 50px;
 }
 .reset:hover {
   background: red;
@@ -136,5 +180,12 @@ export default {
 }
 .pill.active {
   background: black;
+}
+.totalTime {
+  text-align: left;
+  font-size: 32px;
+}
+span {
+  color: green;
 }
 </style>

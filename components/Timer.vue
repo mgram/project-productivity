@@ -43,6 +43,20 @@ export default {
           this.timerState = "start";
           this.timer = this.count;
           this.shouldContinue = false;
+          let current = new Date();
+          let hours = current.getHours().toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+          });
+          let minutes = current.getMinutes().toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+          });
+          let valueToEmit = {
+            time: 1200,
+            endTime: hours + ":" + minutes,
+          };
+          this.$emit("onCompletion", valueToEmit);
         } else if (this.timer >= 0 && this.shouldContinue == true) {
           this.timeOutID = setTimeout(() => this.timer--, 1000);
         }
