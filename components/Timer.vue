@@ -14,6 +14,7 @@
 export default {
   data() {
     return {
+      startTime: "",
       timerState: "start",
       timer: this.count,
       shouldContinue: true,
@@ -58,7 +59,10 @@ export default {
           };
           this.$emit("onCompletion", valueToEmit);
         } else if (this.timer >= 0 && this.shouldContinue == true) {
-          this.timeOutID = setTimeout(() => this.timer--, 1000);
+          this.timeOutID = setTimeout(() => {
+            this.timer =
+              this.count - Math.floor((Date.now() - this.startTime) / 1000) - 1;
+          }, 1000);
         }
       },
     },
@@ -66,8 +70,10 @@ export default {
   methods: {
     toggle() {
       if (this.timerState == "start") {
+        this.startTime = new Date();
         this.timerState = "abort";
-        this.timer--;
+        this.timer =
+          this.count - Math.floor((Date.now() - this.startTime) / 1000) - 1;
         this.shouldContinue = true;
       } else if (this.timerState == "abort") {
         clearTimeout(this.timeOutID);
